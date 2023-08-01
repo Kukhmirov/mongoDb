@@ -42,11 +42,12 @@ router.put("/:id", async(req, res) => {
     const {title, description} = req.body;
 
     try {
+        console.log(title);
         await Todo.findByIdAndUpdate(id, {
             title,
             description,
         });
-        // res.redirect(`/${id}`);
+        res.redirect(`/api/todo/${id}`);
     } catch(env) {
         res.status(500).json(env);
     };

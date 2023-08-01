@@ -11,7 +11,9 @@ app.use("/api/todo", todoApiRouter);
 
 async function start(PORT, UrlDb){
     try {
-        await mongoose.connect(UrlDb);
+        await mongoose.connect(UrlDb, {
+            dbName: 'todo',
+        });
         app.listen(PORT, () => {
             console.log(`Сервер запущена на ${PORT}`);
         });
@@ -20,6 +22,6 @@ async function start(PORT, UrlDb){
     }
 };
 
-const UrlDb = process.env.UrlDb;
+const UrlDb = process.env.MONGODB_URL;
 const PORT = process.env.PORT || 3000;
 start(PORT, UrlDb);
